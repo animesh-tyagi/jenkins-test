@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         GIT_REPO = 'https://github.com/arvind37/Basic-Website-using-HTML-CSS.git'
-        BRANCH = 'master'
+        BRANCH = 'main'
         HTML_DIR = '/var/www/html'
     }
 
