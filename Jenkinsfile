@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GIT_REPO = 'https://github.com/arvind37/Basic-Website-using-HTML-CSS.git'
+        GIT_REPO = 'https://github.com/animesh-tyagi/jenkins-test.git'
         BRANCH = 'main'
         HTML_DIR = '/var/www/html'
     }
