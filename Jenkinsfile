@@ -43,7 +43,7 @@ pipeline {
                 sudo docker build -t "nginx-server-image" .
 
                 sudo docker rm -f nginx-server || true
-                docker run -d --name nginx-server -p 80:80 nginx-server-image
+                sudo docker run -d --name nginx-server -p 80:80 nginx-server-image
 
             '''
             }
