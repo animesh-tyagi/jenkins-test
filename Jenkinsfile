@@ -27,8 +27,7 @@ pipeline {
                 echo "Adding docker GPG keys..."
                 sudo install -m 0755 -d /etc/apt/keyrings
 
-                curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-
+                curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor | sudo tee /etc/apt/keyrings/docker.gpg > /dev/null
 
                 echo "Adding docker's apt repository..."
                 echo \
