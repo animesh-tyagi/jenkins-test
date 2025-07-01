@@ -40,7 +40,7 @@ pipeline {
 
                 
                 echo "Containerizing application..."
-                docker build -t "nginx-server-image" .
+                sudo docker build -t "nginx-server-image" .
 
                 sudo docker rm -f nginx-server || true
                 docker run -d -p --name nginx-server 80:80 nginx-server-image
