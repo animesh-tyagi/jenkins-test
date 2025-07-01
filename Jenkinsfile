@@ -19,13 +19,31 @@ pipeline {
                 echo 'Starting server...'
             sh '''
                 sudo apt update
-                sudo apt upgrade -y
 
-                sudo apt install nginx -y
+                echo "Installing docker..."
+                echo "Installing required packages..."
+                sudo apt install -y ca-certificates curl gnupg
 
-                sudo rm -rf ${HTML_DIR}/*
-                sudo cp -r * ${HTML_DIR}/
-                sudo systemctl restart nginx
+                echo "Adding docker GPG keys..."
+                sudo install -m 0755 -d /etc/apt/keyrings
+
+                curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+
+                echo "Adding docker's apt repository..."
+                echo \
+                "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+                https://download.docker.com/linux/debian bookworm stable" | \
+                sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+                sudo apt update
+                sudo apt install -y docker-ce docker-ce-cli containerd.io
+
+                
+                echo "Containerizing application..."
+                docker build -t "nginx-server-image" .
+                docker run -d -p 80:80 nginx-server-image
+
             '''
             }
         }
